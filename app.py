@@ -24,5 +24,15 @@ def mypage():
     return render_template("mypage.html")
 
 
+@app.route("/find", methods=["GET"])
+def find():
+    return render_template("find.html")
+
+
+@app.route("/signin", methods=["GET"])
+def signin():
+    return render_template("signin.html")
+
+
 if __name__ == "__main__":
     app.run("0.0.0.0", port=5000, debug=True)

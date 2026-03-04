@@ -4,9 +4,14 @@ from flask import render_template
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def home():
     return render_template("index.html")
+
+
+@app.route("/recipe", methods=["GET"])
+def recipe():
+    return render_template("recipe.html")
 
 
 if __name__ == "__main__":

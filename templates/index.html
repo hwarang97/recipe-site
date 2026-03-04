@@ -21,8 +21,10 @@
         <div>
             <h3>한식</h3>
             <div>
-                <img src="../static/korean.jpg" alt="">
-                <p>김치찌개</p>
+                <a href="{{ url_for('recipe')}}">
+                    <img src="{{ url_for('static', filename='korean.jpg')}}" alt="">
+                    <p>김치찌개</p>
+                </a>
             </div>
         </div>
     </div>
@@ -31,8 +33,10 @@
         <div>
             <h3>일식</h3>
             <div>
-                <img src="../static/japanese.jpg" alt="">
-                <p>초밥</p>
+                <a href="{{ url_for('recipe')}}">
+                    <img src="../static/japanese.jpg" alt="">
+                    <p>초밥</p>
+                </a>
             </div>
         </div>
     </div>
@@ -41,8 +45,10 @@
         <div>
             <h3>중식</h3>
             <div>
-                <img src="../static/chinese.jpg" alt="">
-                <p>짜장면</p>
+                <a href="{{ url_for('recipe')}}">
+                    <img src="../static/chinese.jpg" alt="">
+                    <p>짜장면</p>
+                </a>
             </div>
         </div>
     </div>
@@ -51,12 +57,18 @@
         <div>
             <h3>양식</h3>
             <div>
-                <img src="../static/western.jpg" alt="">
-                <p>스파게티</p>
+                <a href="{{ url_for('recipe')}}">
+                    <img src="../static/western.jpg" alt="">
+                    <p>스파게티</p>
+                </a>
             </div>
         </div>
     </div>
 
+
+    <!-- <script>
+        function get_recipe()
+    </script> -->
 
 </body>
 

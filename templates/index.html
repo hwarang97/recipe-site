@@ -34,7 +34,7 @@
             <h3>일식</h3>
             <div>
                 <a href="{{ url_for('recipe')}}">
-                    <img src="../static/japanese.jpg" alt="">
+                    <img src="{{ url_for('static', filename='japanese.jpg') }}" alt="">
                     <p>초밥</p>
                 </a>
             </div>
@@ -46,7 +46,7 @@
             <h3>중식</h3>
             <div>
                 <a href="{{ url_for('recipe')}}">
-                    <img src="../static/chinese.jpg" alt="">
+                    <img src="{{ url_for('static', filename='chinese.jpg') }}" alt="">
                     <p>짜장면</p>
                 </a>
             </div>
@@ -58,7 +58,7 @@
             <h3>양식</h3>
             <div>
                 <a href="{{ url_for('recipe')}}">
-                    <img src="../static/western.jpg" alt="">
+                    <img src="{{ url_for('static', filename='western.jpg') }}" alt="">
                     <p>스파게티</p>
                 </a>
             </div>

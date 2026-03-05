@@ -1,48 +1,58 @@
-from flask import Flask
-from flask import render_template
+# 플라스크 jwt 페이로드(datetime)
+from flask import Flask, render_template, jsonify, request
+from pymongo import MongoClient
+from werkzeug.security import generate_password_hash, check_password_hash
+import jwt
+import datetime
 
 app = Flask(__name__)
 
+SECRET_KEY = "secret_key"
 
-@app.route("/", methods=["GET"])
+# 일단 아무주소나
+client = MongoClient("mongodb+srv://sparta_db_user:[EMAIL_ADDRESS]/?appName=Cluster0")
+
+# 13번 라인 뒤에 이 두 줄만 남기고 나머지 한글 설명은 지우세요
+db = client.dbsparta
+
+
+@app.route("/")
 def home():
     return render_template("index.html")
 
 
-@app.route("/recipe", methods=["GET"])
-def recipe():
-    return render_template("recipe.html")
-    # TODO: DB에서 데이터를 가져와, 파라미터로 넘겨주면 됩니다. DB 만들고 나서 주석부분 진행해보세요.
-    # return render_template("recipe.html", title=title, content=content, logo_location=logo_location, image_location=image_location)
+# 해시 + 솔트는 그냥넘어감
+@app.route("/api/register", methods=["POST"])
+def register():
+    user_id = request.form["id_give"]
+    user_pw = request.form["pw_give"]
+
+    pw_hash = generate_password_hash(user_pw)
+    db.users.insert_one({"id": user_id, "pw": pw_hash})
+    return jsonify({"msg": "회원가입완료"})
 
 
-@app.route("/login", methods=["GET"])
+@app.route("/api/login", methods=["POST"])
 def login():
-    return render_template("login.html")
-    # TODO
-    # return return render_template("login.html", logo_location=logo_location)
+    user_id = request.form["id_give"]
+    user_pw = request.form["pw_give"]
 
+    # 1. DB에서 유저 찾기
+    user = db.users.find_one({"id": user_id})
 
-@app.route("/mypage", methods=["GET"])
-def mypage():
-    return render_template("mypage.html")
-    # TODO
-    # return render_template("mypage.html", logo_location=logo_location, name=name, contents=contents)
+    # 2. 비번 체크 및 토큰 발행
+    if user and check_password_hash(user["pw"], user_pw):
+        payload = {
+            "id": user_id,
+            "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30),
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
-
-@app.route("/find", methods=["GET"])
-def find():
-    return render_template("find.html")
-    # TODO
-    # return render_template("find.html", logo_location=logo_location)
-
-
-@app.route("/signin", methods=["GET"])
-def signin():
-    return render_template("signin.html")
-    # TODO
-    # return render_template("signin.html", logo_location=logo_location)
+        # 자바스크립트가 기다리는 'result': 'success'를 꼭 넣어줘야 함!
+        return jsonify({"result": "success", "token": token})
+    else:
+        return jsonify({"result": "fail", "msg": "아이디/비번을 확인해주세요."})
 
 
 if __name__ == "__main__":
-    app.run("0.0.0.0", port=5000, debug=True)
+    app.run(debug=True)

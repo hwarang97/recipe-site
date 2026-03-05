@@ -9,34 +9,83 @@
 </head>
 
 <body>
+    <style>
+        body{
+        font-family: Arial;
+        margin:0;
+        padding:20px;
+        }
+
+        .header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo{
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .middle-menu{
+            display:flex;
+            justify-content:center;
+            margin-top:10px;                         
+        }
+        label{
+            display:inline-block;
+            width:40px;
+        }
+        input{
+            width:220px;
+        }
+        h2{
+            text-align:center;
+        }
+        .login-box{
+            width:400px;
+            margin:50px auto;
+            padding:70px;
+            border:3px solid #ddd;
+            border-radius:10px;
+        }
+</style>
+
     <div>
         <p>logo</p>
         <img src="{{ logo_location }}" alt="">
     </div>
+        <div class="login-box">
+            <div class = "middle-menu">
+                <div>
+                    <h2>로그인/회원가입</h2>
+                </div>
+            </div>
+                <div class = "middle-menu">
+                    <div>
+                        <label for="user_id">ID</label>
+                        <input type="text" name="user_id" id="user_id" required> 
+                    </div>
+                </div>
 
-    <div>
-        <h2>로그인/회원가입<h2>
-    </div>
+                <div class = "middle-menu">
+                    <div>
+                        <label for="user_password">PW</label>
+                        <input type="password" name="user_password" id="user_password" required>
+                    </div>
+                </div>
 
-    <div>
-        <div>
-            <label for="user_id">ID</label>
-            <input type="text" name="user_id" id="user_id" required>
+                <div class = "middle-menu">
+                    <button class="btn btn-primary" onclick="authenticate()">로그인</button>
+                </div>
+
+                <div class = "middle-menu">
+                    <a href="#">Find ID</a> / 
+                    <a href="{{ url_for('find') }}">Password</a> / 
+                    <a href="{{ url_for('signin') }}">Sign in</a>
+                </div>
         </div>
-
-        <div>
-            <label for="user_password">PW/</label>
-            <input type="text" name="user_password" id="user_password" required>
-        </div>
-
-        <button onclick="authenticate()">로그인</button>
-    </div>
-
-    <div>
-        <p>find ID</p>
-        <a href="{{ url_for('find') }}">password</a>
-        <a href="{{ url_for('signin') }}">sign in</a>
-    </div>
+        
 
     <script>
         function authenticate() {

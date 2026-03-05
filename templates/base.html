@@ -16,16 +16,20 @@
 
     {% if is_login %}
     <div>
-        <a href="{{ url_for('mypage') }}">
-            <p>마이페이지</p>
-        </a>
+        <div class="right-menu">
+            <div>
+                <a href="{{ url_for('mypage') }}">마이페이지</a>
+            </div>
+        </div>
     </div>
 
     {% else %}
     <div>
-        <a href="{{ url_for('login')}}">
-            <p>login</p>
-        </a>
+        <div class="right-menu">
+            <div>
+                <a href="{{ url_for('login')}}">로그인</a>
+            </div>
+        </div>
     </div>
     {% endif %}
 

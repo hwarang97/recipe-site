@@ -4,11 +4,7 @@ from flask import request
 from flask import jsonify
 from flask import make_response
 from pymongo import MongoClient
-
-import hmac
-import hashlib
-import base64
-
+import jwt
 
 import os
 from dotenv import load_dotenv
@@ -24,7 +20,14 @@ secret = os.getenv("SECRET")
 
 @app.route("/", methods=["GET"])
 def home():
-    return render_template("index.html")
+    jwt = request.cookies.get("token")
+    if jwt:  # 추후 무결성 검사
+        print("have token")
+        is_login = True
+    else:
+        print("no token")
+        is_login = False
+    return render_template("index.html", is_login=is_login)
 
 
 @app.route("/recipe", methods=["GET"])
@@ -47,22 +50,11 @@ def authenticate():
     password = request.form.get("password")
     stored_user = db.users.find_one({"id": f"{id}"})
     if stored_user and stored_user["password"] == password:
-        response = make_response(jsonify({"result": "success", "id": f"{id}"}))
-
-        # 모듈에 저장해서 불러오기
-        # header = b'{"alg": "HS256", "typ": "JWT"}'
-        # payload = b'{"iss": "whatdoieattoday", "db_id": "ksh"}'
-        # encoded_header = base64.b64encode(header)
-        # encoded_payload = base64.b64encode(payload)
-        # message = f"{encoded_header}.{encoded_payload}".encode("utf-8")
-        # signature = hmac.new(secret.encode("utf-8"), message, hashlib.sha256)
-        # jwt = f"{encoded_header}.{encoded_payload}.{signature}"
-        # response.set_cookie("jwt", jwt, httponly=True)
-
-        # print(response.headers)
-
-        # return response
-        jsonify({"result": "success"})
+        payload = {"user_id": id, "iss": "whatdoieattoday"}
+        token = jwt.encode(payload, secret, algorithm="HS256")
+        response = make_response(jsonify({"result": "success"}))
+        response.set_cookie("token", token, httponly=True, max_age=60)
+        return response
     else:
         return jsonify({"result": "fail"})
 

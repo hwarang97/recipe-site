@@ -1,32 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>오늘뭐먹지</title>
-</head>
+<div>
+    <h3>{{ title }}</h3>
+    <img src="" alt="">
+</div>
 
-<body>
-    <div>
-        <p>logo</p>
-        <img src="{{ logo_location }}" alt="">
-    </div>
+<div>
+    <h3>contnet</h3>
+    <p>{{ content }}</p>
+</div>
 
-    <div>
-        <p> login </p>
-    </div>
-
-    <div>
-        <h3>{{ title }}</h3>
-        <img src="" alt="">
-    </div>
-
-    <div>
-        <h3>contnet</h3>
-        <p>{{ content }}</p>
-    </div>
-
-</body>
-
-</html>
+{% endblock %}

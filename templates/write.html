@@ -1,36 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+{% block content %}
+<p>제목</p>
+<div>
+    <p>카테고리</p>
+    <select class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="1">한식</option>
+        <option value="2">일식</option>
+        <option value="3">양식</option>
+        <option value="4">중식</option>
+    </select>
+</div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>오늘뭐먹지</title>
-</head>
+<p>대표이미지</p>
+<div class="mb-3">
+    <label for="formFile" class="form-label">Default file input example</label>
+    <input class="form-control" type="file" id="formFile">
+</div>
 
-<body>
-    <p>제목</p>
-    <div>
-        <p>카테고리</p>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">한식</option>
-            <option value="2">일식</option>
-            <option value="3">양식</option>
-            <option value="4">중식</option>
-        </select>
-    </div>
+<div>
+    <p>내용</p>
 
-    <p>대표이미지</p>
-    <div class="mb-3">
-        <label for="formFile" class="form-label">Default file input example</label>
-        <input class="form-control" type="file" id="formFile">
-    </div>
-
-    <div>
-        <p>내용</p>
-
-    </div>
-</body>
-
-</html>
+</div>
+{% endblock %}

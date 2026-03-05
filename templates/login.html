@@ -1,111 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>오늘뭐먹지</title>
-</head>
-
-<body>
-    <style>
-        body{
+{% block style %}
+<style>
+    body {
         font-family: Arial;
-        margin:0;
-        padding:20px;
-        }
+        margin: 0;
+        padding: 20px;
+    }
 
-        .header{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        .logo{
-            font-size:22px;
-            font-weight:bold;
-        }
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+    }
 
-        .middle-menu{
-            display:flex;
-            justify-content:center;
-            margin-top:10px;                         
-        }
-        label{
-            display:inline-block;
-            width:40px;
-        }
-        input{
-            width:220px;
-        }
-        h2{
-            text-align:center;
-        }
-        .login-box{
-            width:400px;
-            margin:50px auto;
-            padding:70px;
-            border:3px solid #ddd;
-            border-radius:10px;
-        }
+    .middle-menu {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    label {
+        display: inline-block;
+        width: 40px;
+    }
+
+    input {
+        width: 220px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .login-box {
+        width: 400px;
+        margin: 50px auto;
+        padding: 70px;
+        border: 3px solid #ddd;
+        border-radius: 10px;
+    }
 </style>
+{% endblock %}
 
-    <div>
-        <p>logo</p>
-        <img src="{{ logo_location }}" alt="">
-    </div>
-        <div class="login-box">
-            <div class = "middle-menu">
-                <div>
-                    <h2>로그인/회원가입</h2>
-                </div>
-            </div>
-                <div class = "middle-menu">
-                    <div>
-                        <label for="user_id">ID</label>
-                        <input type="text" name="user_id" id="user_id" required> 
-                    </div>
-                </div>
-
-                <div class = "middle-menu">
-                    <div>
-                        <label for="user_password">PW</label>
-                        <input type="password" name="user_password" id="user_password" required>
-                    </div>
-                </div>
-
-                <div class = "middle-menu">
-                    <button class="btn btn-primary" onclick="authenticate()">로그인</button>
-                </div>
-
-                <div class = "middle-menu">
-                    <a href="#">Find ID</a> / 
-                    <a href="{{ url_for('find') }}">Password</a> / 
-                    <a href="{{ url_for('signin') }}">Sign in</a>
-                </div>
+{% block content %}
+<div class="login-box">
+    <div class="middle-menu">
+        <div>
+            <h2>로그인/회원가입</h2>
         </div>
-        
+    </div>
+    <div class="middle-menu">
+        <div><label for="user_id">ID</label><input type="text" name="user_id" id="user_id" required></div>
+    </div>
+    <div class="middle-menu">
+        <div><label for="user_password">PW</label><input type="password" name="user_password" id="user_password"
+                required></div>
+    </div>
+    <div class="middle-menu"><button class="btn btn-primary" onclick="authenticate()">로그인</button></div>
+    <div class="middle-menu"><a href="#">Find ID</a>/ <a href="{{ url_for('find') }}">Password</a>/ <a
+            href="{{ url_for('signin') }}">Sign in</a></div>
+</div>
+<script>function authenticate() {
+        $.ajax({
 
-    <script>
-        function authenticate() {
-            $.ajax({
-                type: "POST",
-                url: "{{ url_for('login') }}",
-                data: { "id": $('#user_id').val(), "password": $('#user_password').val() },
-                success: function (response) {
-                    if (response.result === "success") {
-                        alert("로그인 성공!");
-                    }
-                    else {
-                        alert("유효하지 않은 유저 정보");
-                    }
+            type: "POST",
+            url: "{{ url_for('login') }}",
+            data: {
+                "id": $('#user_id').val(), "password": $('#user_password').val()
+            }
+
+            ,
+            success: function (response) {
+                if (response.result === "success") {
+                    alert("로그인 성공!");
                 }
-            })
-        }
-    </script>
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js"
-        integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
-</body>
 
-</html>
+                else {
+                    alert("유효하지 않은 유저 정보");
+                }
+            }
+        })
+    }
+
+</script>
+{% endblock %}

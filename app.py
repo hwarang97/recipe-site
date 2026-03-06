@@ -26,15 +26,23 @@ def home():
 
 @app.route("/recipe", methods=["GET"])
 def recipe():
-    return render_template("recipe.html", is_login=is_login(request, secret))
-    # TODO: DB에서 데이터를 가져와, 파라미터로 넘겨주면 됩니다. DB 만들고 나서 주석부분 진행해보세요.
-    # return render_template("recipe.html", title=title, content=content, logo_location=logo_location, image_location=image_location)
+    food = db.recipe.find_one({"title": "백종원 스타일 김치볶음밥"})
+    title = food["title"]
+    content = food["content"]
+    image_location = food["image"]
+    return render_template(
+        "recipe.html",
+        is_login=is_login(request, secret),
+        title=title,
+        content=content,
+        image_location=image_location,
+    )
+
 
 @app.route("/login", methods=["GET"])
 def login():
+    food = db.recipe.find_one({"title": "백종원 스타일 김치볶음밥"})
     return render_template("login.html", is_login=is_login(request, secret))
-    # TODO
-    # return return render_template("login.html", logo_location=logo_location)
 
 
 @app.route("/login", methods=["POST"])
@@ -54,22 +62,25 @@ def authenticate():
 
 @app.route("/mypage", methods=["GET"])
 def mypage():
-    return render_template("mypage.html", is_login=is_login(request, secret))
-    # TODO
-    # return render_template("mypage.html", logo_location=logo_location, name=name, contents=contents)
+    food = db.recipe.find_one({"title": "백종원 스타일 김치볶음밥"})
+    title = food["title"]
+    content = food["content"]
+    return render_template(
+        "mypage.html",
+        is_login=is_login(request, secret),
+        name="",
+        contents=content,
+    )
 
 
 @app.route("/find", methods=["GET"])
 def find():
     return render_template("find.html", is_login=is_login(request, secret))
-    # return render_template("find.html", logo_location=logo_location)
 
 
 @app.route("/signin", methods=["GET"])
 def signin():
     return render_template("signin.html", is_login=is_login(request, secret))
-    # TODO
-    # return render_template("signin.html", logo_location=logo_location)
 
 
 if __name__ == "__main__":

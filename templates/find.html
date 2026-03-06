@@ -1,12 +1,155 @@
 {% extends 'base.html' %}
-{% block content %}
-<div>
-    <form>
-        ID<br>
-        <input type="text" placeholder="ID"><br><br>
-        Email<br>
-        <input type="email" placeholder="Email"><br><br>
-        <button>확인</button>
-    </form>
-</div>=
+{% block style %}
+    <style>
+       body{
+        font-family: Arial;
+        margin:0;
+        padding:20px;
+        }
+
+        .header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo{
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .middle-menu{
+            display:flex;
+            justify-content:center;
+            margin-top:10px;                         
+        }
+        label{
+            display:inline-block;
+            width:40px;
+        }
+        input{
+            width:220px;
+        }
+        h2{
+            text-align:center;
+        }
+        .login-box{
+            width:400px;
+            margin:50px auto;
+            padding:30px;
+            border:3px solid #ddd;
+            border-radius:10px;
+        }
+        .right-menu{
+            display:flex;
+            justify-content:flex-end;
+        }
+        label{
+            white-space: nowrap;
+        }
+</style>
 {% endblock %}
+
+{% block content %}
+    <div class="login-box">
+        <div>
+            <h2>비밀번호 찾기</h2>
+        </div>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">ID</label>
+                <input type="text" class="form-control" placeholder="ID">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Email">
+            </div>
+            <div class="right-menu">
+                <button class="btn btn-primary">확인</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘뭐먹지</title>
+</head>
+    <style>
+       body{
+        font-family: Arial;
+        margin:0;
+        padding:20px;
+        }
+
+        .header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo{
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .middle-menu{
+            display:flex;
+            justify-content:center;
+            margin-top:10px;                         
+        }
+        label{
+            display:inline-block;
+            width:40px;
+        }
+        input{
+            width:220px;
+        }
+        h2{
+            text-align:center;
+        }
+        .login-box{
+            width:400px;
+            margin:50px auto;
+            padding:30px;
+            border:3px solid #ddd;
+            border-radius:10px;
+        }
+        .right-menu{
+            display:flex;
+            justify-content:flex-end;
+        }
+        label{
+            white-space: nowrap;
+        }
+</style>
+
+<body>
+    <p>logo</p>
+    <img src="{{ logo_location }}" alt="">
+
+    <div class="login-box">
+        <form>
+            <div class="mb-3">
+                <label class="form-label">ID</label>
+                <input type="text" class="form-control" placeholder="ID">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Email">
+            </div>
+
+            <div class="right-menu">
+                <button class="btn btn-primary">확인</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
+>>>>>>> Stashed changes -->

@@ -1,12 +1,82 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="mb-3">
-    <label for="formFile" class="form-label">Default file input example</label>
-    <input class="form-control" type="file" id="formFile">
+
+<div class="container">
+
+<div class="header">
+<a href="mypage.html" class="back">←</a>
+게시글 수정
 </div>
 
-<div class="content">
-    <p>blabla</p>
-    <button>수정</button>
+<div class="form-row">
+<label>제목</label>
+<input type="text" id="title" value="기존 제목">
 </div>
+
+<div class="form-row">
+<label>카테고리</label>
+
+<select>
+<option selected>한식</option>
+<option>일식</option>
+<option>양식</option>
+<option>중식</option>
+</select>
+
+</div>
+
+<p>대표 이미지</p>
+
+<div class="image-box">
+
+<img src="western.jpg" id="preview">
+
+<input type="file" onchange="previewImage(event)">
+
+</div>
+
+<p>내용</p>
+
+<textarea id="content">기존 내용</textarea>
+
+<div class="button-area">
+
+<button onclick="location.href='mypage.html'">취소</button>
+
+<button onclick="editPost()">완료</button>
+
+</div>
+
+</div>
+
+<script>
+
+function previewImage(event){
+
+    const reader = new FileReader();
+    reader.onload = function(){
+        document.getElementById("preview").src = reader.result;
+    }
+
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+
+function editPost(){
+
+    let title = document.getElementById("title").value.trim();
+    let content = document.getElementById("content").value.trim();
+
+    if(title === "" || content === ""){
+        alert("아직 작성되지 않았습니다.");
+        return;
+    }
+
+    alert("수정이 완료되었습니다.");
+
+    location.href = "mypage.html";
+}
+
+</script>
+
 {% endblock %}

@@ -1,14 +1,49 @@
 {% extends 'base.html' %}
+
+{% block style %}
+<style>
+body{
+    font-family: Arial;
+    margin:0;
+    padding:20px;
+}
+.recipe-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.recipe-img img{
+    width:100%;
+    height:400px;
+    object-fit:cover;
+    border:2px solid #ccc;
+    border-radius:15px;
+    margin-top:20px;
+}
+.content-title{
+    margin-top:40px;
+    font-weight:bold;
+}
+.recipe-content{
+    font-size:18px;
+}
+
+</style>
+{% endblock %}
+
+
 {% block content %}
 
-<div>
-    <h3>{{ title }}</h3>
-    <img src="" alt="">
+<hr>
+<div class="recipe-header">
+    <h2>{{ title }}</h2>
+    <p>{{ _user_id }}</p>
 </div>
-
-<div>
-    <h3>contnet</h3>
-    <p>{{ content }}</p>
+<div class="recipe-img">
+    <img src="{{ url_for('static', filename='korean.jpg') }}">
 </div>
-
-{% endblock %}
+<div class="content-title">
+    <h3>Content</h3>
+</div>
+<hr>
+<p class="recipe-content">{{ content }}</p>{% endblock %}

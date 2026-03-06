@@ -15,20 +15,16 @@
     </div>
 
     {% if is_login %}
-    <div>
+    <div class="header">
         <div class="right-menu">
-            <div>
-                <a href="{{ url_for('mypage') }}">마이페이지</a>
-            </div>
+            <a href="{{ url_for('mypage') }}">마이페이지</a>
         </div>
     </div>
 
     {% else %}
-    <div>
+    <div class="header">
         <div class="right-menu">
-            <div>
-                <a href="{{ url_for('login')}}">로그인</a>
-            </div>
+            <a href="{{ url_for('login')}}">로그인</a>
         </div>
     </div>
     {% endif %}

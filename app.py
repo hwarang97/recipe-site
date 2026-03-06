@@ -30,7 +30,6 @@ def recipe():
     # TODO: DB에서 데이터를 가져와, 파라미터로 넘겨주면 됩니다. DB 만들고 나서 주석부분 진행해보세요.
     # return render_template("recipe.html", title=title, content=content, logo_location=logo_location, image_location=image_location)
 
-
 @app.route("/login", methods=["GET"])
 def login():
     return render_template("login.html", is_login=is_login(request, secret))

@@ -1,25 +1,175 @@
 {% extends 'base.html' %}
+{% block style %}
+<style>
+
+.container{
+    width:800px;
+    margin:auto;
+}
+
+.header{
+    border:2px solid #444;
+    border-radius:20px;
+    padding:15px;
+    text-align:center;
+    font-size:24px;
+    margin-bottom:30px;
+    position:relative;
+}
+
+.back{
+    position:absolute;
+    left:20px;
+    top:15px;
+    font-size:24px;
+    text-decoration:none;
+}
+
+.form-row{
+    display:flex;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.form-row label{
+    width:120px;
+    font-size:18px;
+}
+
+.form-row input,
+.form-row select{
+    flex:1;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid #aaa;
+}
+
+.image-box{
+    border:2px solid #aaa;
+    border-radius:15px;
+    height:200px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:20px;
+}
+
+.image-box img{
+    max-height:120px;
+    margin-bottom:10px;
+}
+
+textarea{
+    width:100%;
+    height:150px;
+    border-radius:10px;
+    border:1px solid #aaa;
+    padding:10px;
+}
+
+.button-area{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+}
+
+.button-area button{
+    padding:10px 30px;
+    border-radius:10px;
+    border:2px solid #333;
+    background:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+</style>
+{% endblock %}
+
 {% block content %}
-<p>제목</p>
-<div>
-    <p>카테고리</p>
-    <select class="form-select" aria-label="Default select example">
-        <option selected>Open this select menu</option>
-        <option value="1">한식</option>
-        <option value="2">일식</option>
-        <option value="3">양식</option>
-        <option value="4">중식</option>
-    </select>
-</div>
 
-<p>대표이미지</p>
-<div class="mb-3">
-    <label for="formFile" class="form-label">Default file input example</label>
-    <input class="form-control" type="file" id="formFile">
-</div>
+<div class="container">
 
-<div>
-    <p>내용</p>
+<div class="header">
+
+<a href="mypage.html" class="back">←</a>
+
+게시글 작성
 
 </div>
+
+<div class="form-row">
+<label>제목</label>
+<input type="text" id="title" placeholder="title 입력">
+</div>
+
+<div class="form-row">
+<label>카테고리</label>
+
+<select>
+<option>한식</option>
+<option>일식</option>
+<option>양식</option>
+<option>중식</option>
+</select>
+
+</div>
+
+<p>대표 이미지</p>
+
+<div class="image-box">
+
+<img id="preview" src="" style="display:none;">
+
+<input type="file" onchange="previewImage(event)">
+
+</div>
+
+<p>내용</p>
+
+<textarea id="content" placeholder="내용 입력"></textarea>
+
+<div class="button-area">
+
+<button onclick="location.href='mypage.html'">취소</button>
+
+<button onclick="writePost()">등록</button>
+
+</div>
+
+</div>
+
+<script>
+
+function previewImage(event){
+
+    const reader = new FileReader();
+
+    reader.onload = function(){
+        const preview = document.getElementById("preview");
+        preview.src = reader.result;
+        preview.style.display = "block";
+    }
+
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+
+function writePost(){
+
+    let title = document.getElementById("title").value.trim();
+    let content = document.getElementById("content").value.trim();
+
+    if(title === "" || content === ""){
+        alert("아직 작성되지 않았습니다.");
+        return;
+    }
+
+    alert("게시글이 등록되었습니다.");
+
+    location.href = "mypage.html";
+}
+
+</script>
+
 {% endblock %}

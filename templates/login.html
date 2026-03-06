@@ -43,6 +43,17 @@
         padding: 70px;
         border: 3px solid #ddd;
         border-radius: 10px;
+        text-align: center;
+    }
+    .middle-menu{
+        display:flex;
+        justify-content:center;
+        margin-top:10px;
+    }
+
+    .middle-menu div{
+        width:220px;
+        text-align:left;
     }
 </style>
 {% endblock %}
@@ -65,14 +76,16 @@
     <div class="middle-menu"><a href="#">Find ID</a>/ <a href="{{ url_for('find') }}">Password</a>/ <a
             href="{{ url_for('signin') }}">Sign in</a></div>
 </div>
-<script>
-    function authenticate() {
+<script>function authenticate() {
         $.ajax({
+
             type: "POST",
             url: "{{ url_for('login') }}",
             data: {
                 "id": $('#user_id').val(), "password": $('#user_password').val()
-            },
+            }
+
+            ,
             success: function (response) {
                 if (response.result === "success") {
                     alert("로그인 성공!");

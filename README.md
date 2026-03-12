@@ -68,6 +68,41 @@
   - 중식
   - 일식
 
+## 화면 미리보기
+
+README에 사용하는 이미지 자산은 서비스 실행용 `static` 폴더와 분리해 `docs/images`에 정리했습니다.
+
+| 화면 | 파일 |
+| --- | --- |
+| 메인 화면 | `docs/images/main-page.png` |
+| 로그인 화면 | `docs/images/login-page.png` |
+| 로그인 후 메인 화면 | `docs/images/main-after-login.png` |
+| 마이페이지 | `docs/images/mypage.png` |
+
+### 1. 메인 화면
+
+메인 화면에서는 레시피 목록을 카드 형태로 확인할 수 있습니다.
+
+![메인 화면](docs/images/main-page.png)
+
+### 2. 로그인 화면
+
+로그인 화면에서는 ID와 비밀번호를 입력해 인증을 요청할 수 있습니다.
+
+![로그인 화면](docs/images/login-page.png)
+
+### 3. 로그인 후 메인 화면
+
+로그인에 성공하면 상단 메뉴에서 마이페이지로 이동할 수 있는 상태가 표시됩니다.
+
+![로그인 후 메인 화면](docs/images/main-after-login.png)
+
+### 4. 마이페이지
+
+마이페이지에서는 사용자 정보와 게시글 영역을 확인할 수 있습니다.
+
+![마이페이지](docs/images/mypage.png)
+
 ## Tech Stack
 
 | 카테고리 | 기술 |
